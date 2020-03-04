@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AndroidXSampleArchitectureApp</string>
+    <string name="msg_token_fmt">Token received is %1$s</string>
+</resources>

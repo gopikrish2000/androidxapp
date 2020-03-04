@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "333336573514",
+    "firebase_url": "https://androidxsamplegopi.firebaseio.com",
+    "project_id": "androidxsamplegopi",
+    "storage_bucket": "androidxsamplegopi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333336573514:android:88bb07456458255e6a18b3",
+        "android_client_info": {
+          "package_name": "com.mlrecommendation.gopi.androidxsamplearchitectureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333336573514-e928msr6rmld4ub3osdc68hi3s0sq1le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgQTAfEEXf92yGTCLKE_VvKapEUYYmsX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333336573514-e928msr6rmld4ub3osdc68hi3s0sq1le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
