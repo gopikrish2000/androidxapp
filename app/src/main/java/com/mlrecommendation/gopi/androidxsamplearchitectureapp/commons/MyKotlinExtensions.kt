@@ -47,3 +47,5 @@ fun Any?.printAll(vararg any:Any?){
 fun Any.emptyLine(){
     println("")
 }
+
+fun Throwable.getStackTraceAsString() = CommonUtils.getStackTraceAsString(this)

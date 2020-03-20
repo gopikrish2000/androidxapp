@@ -13,5 +13,7 @@ class SqlLiteDbTestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        binding = ActivitySqlLiteDbTestBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_sql_lite_db_test)
+
+//        throw RuntimeException("My Gopi Exception")
     }
 }

@@ -1,22 +1,20 @@
 package com.mlrecommendation.gopi.androidxsamplearchitectureapp.commons
 
+import android.app.ActivityManager
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.os.Environment
 import android.os.StrictMode
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
-import com.mlrecommendation.gopi.androidxsamplearchitectureapp.R
-import android.app.ActivityManager.RunningAppProcessInfo
-import android.app.ActivityManager
-import android.os.Environment
-import android.os.Process.myPid
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.BuildConfig
 import java.io.File
+import java.io.PrintWriter
+import java.io.StringWriter
 
 
 class MyApplication : Application() {
@@ -53,13 +51,13 @@ class MyApplication : Application() {
                     .build()
             )
         }
+        handleAllExceptions()
         super.onCreate()
         val path:String = Environment.getExternalStorageDirectory().path + File.separator +"ss"
         println("path is $path")
         inst = this
         createNotificationChannel()
         firebaseTokenReceive()
-        handleAllExceptions()
     }
 
 
@@ -84,7 +82,7 @@ class MyApplication : Application() {
 
     private fun handleAllExceptions() {
         Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
-            Log.e("gopi","DEFAULTEXCEPTIONHANDLER thread ${thread.name} with exception ${throwable.message}")
+            Log.e("gopi","DEFAULTEXCEPTIONHANDLER thread ${throwable.localizedMessage} with exception ${throwable.getStackTraceAsString()}")
         }
     }
 

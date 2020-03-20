@@ -5,6 +5,8 @@ import android.content.res.Configuration
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import java.io.PrintWriter
+import java.io.StringWriter
 
 
 class CommonUtils {
@@ -41,6 +43,12 @@ class CommonUtils {
 
         fun isLandscapeMode(): Boolean {
             return MyApplication.getInstance().getApplicationContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+        }
+
+        fun getStackTraceAsString(throwable: Throwable): String? {
+            val stringWriter = StringWriter()
+            throwable.printStackTrace(PrintWriter(stringWriter))
+            return stringWriter.toString()
         }
     }
 }
