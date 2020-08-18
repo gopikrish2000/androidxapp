@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.DB.sqlliteDB.SqlLiteDbTestActivity
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.InterProcessComminucation.MainProcessActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.ViewConcepts.viewbasic.MaskTestActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.ViewConcepts.viewbasic.ViewAdvancedConceptsActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.ViewConcepts.viewbasic.ViewConceptsActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.architectures.mvvm.MvvmFirstActivity
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.lifecycle.LifeCycleFirstActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.lifecycle.TestLifecycleActivity
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.notificationsdemo.NotificationDemoActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.RecyclerviewDiffUtilTestActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.diffUtil.DiffUtilTestActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.recyclerviewUpdatesChecker.RecyclerViewUpdatesCheckerActivity
@@ -17,7 +20,7 @@ import com.mlrecommendation.gopi.androidxsamplearchitectureapp.threading.complet
 
 class MainActivity : AppCompatActivity() {
 
-    val forwardActivity = SqlLiteDbTestActivity::class.java
+    val forwardActivity = NotificationDemoActivity::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

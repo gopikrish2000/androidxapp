@@ -4,26 +4,28 @@ import android.app.ActivityManager
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ComponentName
 import android.content.Context
-import android.os.Build
-import android.os.Environment
-import android.os.StrictMode
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.*
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.BuildConfig
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.InterProcessComminucation.MyInterProcessService
 import java.io.File
-import java.io.PrintWriter
-import java.io.StringWriter
 
 
 class MyApplication : Application() {
     val TAG = "MyGopiApplication"
     val isStrictModeAllowed = false
+    lateinit var myApplicationLifecycleCallbacks:MyApplicationLifecycleCallbacks
 
 
     companion object {
         lateinit var inst: MyApplication
+        var messenger:Messenger? = null
 
         fun getInstance(): MyApplication {
             return inst
@@ -31,9 +33,24 @@ class MyApplication : Application() {
     }
 
     override fun onCreate() {
+        inst = this
         if(checkIfServiceRemoteProcess(baseContext)){
             println(" Application onCreate called again for new IPC Service Process")
             super.onCreate()
+            //ProcessLifecycleOwner.get().lifecycle.addObserver(MyProcessLifecycleObserver().apply { process = "remote" })
+
+            bindService(Intent(this, MyInterProcessService::class.java), object : ServiceConnection{
+                override fun onServiceDisconnected(name: ComponentName?) {
+                }
+
+                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                    messenger = Messenger(service)
+                    messenger?.send(Message.obtain().apply { what = 19 })
+                }
+
+            }, Context.BIND_AUTO_CREATE)
+            myApplicationLifecycleCallbacks = MyApplicationLifecycleCallbacks("child")
+            registerActivityLifecycleCallbacks(myApplicationLifecycleCallbacks)
             return
         }
 
@@ -55,9 +72,13 @@ class MyApplication : Application() {
         super.onCreate()
         val path:String = Environment.getExternalStorageDirectory().path + File.separator +"ss"
         println("path is $path")
-        inst = this
-        createNotificationChannel()
+
+//        createNotificationChannel()
         firebaseTokenReceive()
+
+        myApplicationLifecycleCallbacks = MyApplicationLifecycleCallbacks()
+//        registerActivityLifecycleCallbacks(myApplicationLifecycleCallbacks)
+//        ProcessLifecycleOwner.get().lifecycle.addObserver(MyProcessLifecycleObserver())
     }
 
 
@@ -83,6 +104,7 @@ class MyApplication : Application() {
     private fun handleAllExceptions() {
         Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
             Log.e("gopi","DEFAULTEXCEPTIONHANDLER thread ${throwable.localizedMessage} with exception ${throwable.getStackTraceAsString()}")
+            throwable.cause?.javaClass.print()
         }
     }
 

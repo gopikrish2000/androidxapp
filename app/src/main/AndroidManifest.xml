@@ -17,7 +17,18 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".DB.sqlliteDB.SqlLiteDbTestActivity"></activity>
+        <activity android:name=".notificationsdemo.NotificationDemoActivity"></activity>
+
+        <service
+                android:name=".InterProcessComminucation.MyInterProcessService"
+                android:enabled="true"
+                android:exported="true" />
+
+        <activity
+                android:name=".InterProcessComminucation.ChildProcessActivity"
+                android:process=":remote" />
+        <activity android:name=".InterProcessComminucation.MainProcessActivity" />
+        <activity android:name=".DB.sqlliteDB.SqlLiteDbTestActivity" />
         <activity android:name=".recyclerview.recyclerviewUpdatesChecker.RecyclerViewUpdatesCheckerActivity" />
         <activity android:name=".threading.completeComponents.impComponents.impComponents1.HandlerAdvancedTestActivity" />
         <activity android:name=".lifecycle.TestLifecycleActivity" />
@@ -35,7 +46,9 @@
         <activity
                 android:name=".architectures.mvvm.MvvmFirstActivity"
                 android:screenOrientation="sensor" />
-        <activity android:name=".lifecycle.LifeCycleSecondActivity" />
+        <activity
+                android:name=".lifecycle.LifeCycleSecondActivity"
+                android:process=":remote" />
         <activity android:name=".lifecycle.LifeCycleFirstActivity" />
         <activity android:name=".SingleTopTasks.FirstTaskActivity">
             <intent-filter>
