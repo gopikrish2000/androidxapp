@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.R;
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.asynctaskTest.AsyncTestActivity;
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.threading.completeComponents.impComponents.utils.ThreadUtils;
 import io.reactivex.Observable;
@@ -28,6 +30,17 @@ public class MyForeGroundService extends Service { // U can check Running Servic
     @Override
     public void onCreate() {
         super.onCreate();
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AsyncTestActivity.class), 0);
+        Notification notification = new NotificationCompat.Builder(this,"GopiSilentChannel")
+                .setContentTitle("MyTitleSilent")
+                .setContentText("MyTextSilent")
+                .setSmallIcon(R.drawable.ic_notif_img)
+                //                .setGroup("Gopi")
+                .setOngoing(true)
+                .setContentIntent(pendingIntent)
+                .build();
+
+        startForeground(7,notification);
         System.out.println("onCreate of service defaultStr is "+ defaultString);
     }
 
@@ -37,14 +50,29 @@ public class MyForeGroundService extends Service { // U can check Running Servic
         Intent intentOther = new Intent(this, AsyncTestActivity.class);
         defaultString = "otherrr";
 
+        ThreadUtils.sleep(2000);
         final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intentOther, 0);
         Notification notification = new NotificationCompat.Builder(this,"GopiChannel")
-                .setContentTitle("MyTitle")
-                .setContentText("MyText")
-//                .setGroup("Gopi")
-                .setOngoing(true)
+                .addAction(new NotificationCompat.Action(R.drawable.ic_notif_img, "GopiAction", PendingIntent.getActivity(getBaseContext(), 44, intentOther,0)))
+                .setContentTitle("MyTitleNormal")
+                .setContentText("MyTextNormal")
+                .setSmallIcon(R.drawable.computer)
+                //                .setGroup("Gopi")
+//                .setOngoing(true)
                 .setContentIntent(pendingIntent)
                 .build();
+
+        /*
+        *
+        *  NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(getApplicationContext(), channelId)
+                        .setContentTitle(
+                                getApplicationContext()
+                                        .getResources()
+                                        .getString(R.string.google_assistant_verification_notification_title))
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setPriority(NotificationManager.IMPORTANCE_DEFAULT)
+                        .setVisibility(Notification.VISIBILITY_PUBLIC);*/
 
         startForeground(7,notification);
 

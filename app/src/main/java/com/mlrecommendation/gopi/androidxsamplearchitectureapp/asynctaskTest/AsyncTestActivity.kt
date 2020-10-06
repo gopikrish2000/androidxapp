@@ -16,7 +16,7 @@ class AsyncTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_async_test)
         val myAsyncTask = MyAsyncTask()
         myAsyncTask.execute()
-        Observable.just(1).delay(2,TimeUnit.SECONDS).observeOn(Schedulers.newThread()).subscribe { myAsyncTask.executeOnExecutor(Executors.newSingleThreadExecutor(),"temp") }
+       // Observable.just(1).delay(2,TimeUnit.SECONDS).observeOn(Schedulers.newThread()).subscribe { myAsyncTask.executeOnExecutor(Executors.newSingleThreadExecutor(),"temp") }
     }
 }
 

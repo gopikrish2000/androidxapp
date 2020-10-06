@@ -16,11 +16,12 @@ import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.Recy
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.diffUtil.DiffUtilTestActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.recyclerview.recyclerviewUpdatesChecker.RecyclerViewUpdatesCheckerActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.rxjavaPrac.rxcode.RxCodeActivity
+import com.mlrecommendation.gopi.androidxsamplearchitectureapp.services.ForegroundServiceTestActivity
 import com.mlrecommendation.gopi.androidxsamplearchitectureapp.threading.completeComponents.impComponents.impComponents1.HandlerAdvancedTestActivity
 
 class MainActivity : AppCompatActivity() {
 
-    val forwardActivity = NotificationDemoActivity::class.java
+    val forwardActivity = ForegroundServiceTestActivity::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

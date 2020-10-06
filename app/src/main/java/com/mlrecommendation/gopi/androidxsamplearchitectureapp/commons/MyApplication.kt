@@ -68,12 +68,12 @@ class MyApplication : Application() {
                     .build()
             )
         }
-        handleAllExceptions()
+//        handleAllExceptions()
         super.onCreate()
         val path:String = Environment.getExternalStorageDirectory().path + File.separator +"ss"
         println("path is $path")
 
-//        createNotificationChannel()
+        createNotificationChannel()
         firebaseTokenReceive()
 
         myApplicationLifecycleCallbacks = MyApplicationLifecycleCallbacks()
@@ -137,6 +137,19 @@ class MyApplication : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "GopiChannel"
             val descriptionText = "Gopi Channel Description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(name, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "GopiSilentChannel"
+            val descriptionText = "Gopi Silent Channel"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(name, name, importance).apply {
                 description = descriptionText

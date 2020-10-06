@@ -31,9 +31,9 @@ public class ForegroundServiceTestActivity extends AppCompatActivity {
 
         findViewById(R.id.stopForegroundBtn).setOnClickListener(v -> {
             Intent intent = new Intent(this, serviceClass);
-//            stopService(intent);
-            System.out.println("btn unbinding serviceConnection " + serviceConnection);
-            unbindService(serviceConnection);
+            stopService(intent);
+//            System.out.println("btn unbinding serviceConnection " + serviceConnection);
+//            unbindService(serviceConnection);
 //            stopService(intent);
         });
 
@@ -65,7 +65,7 @@ public class ForegroundServiceTestActivity extends AppCompatActivity {
         intent.putExtra("firstParam", "firstVal "+ val);
         intent.putExtra("secondParam", "secondVal "+ val);
         ContextCompat.startForegroundService(ForegroundServiceTestActivity.this, intent);
-        serviceConnection = new ServiceConnection() {
+        /*serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 serviceObj = (MyForeGroundService.GopiBinder) service;
@@ -83,7 +83,7 @@ public class ForegroundServiceTestActivity extends AppCompatActivity {
                 System.out.println("ForegroundServiceTestActivity.onBindingDied ");
             }
         };
-        bindService(intent, serviceConnection,Context.BIND_AUTO_CREATE);
+        bindService(intent, serviceConnection,Context.BIND_AUTO_CREATE);*/
     }
 
     @Override
